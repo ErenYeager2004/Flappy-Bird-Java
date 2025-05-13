@@ -45,6 +45,7 @@ public class FlappyBird extends JPanel implements ActionListener,KeyListener{
             if(gameOver){
                 bird.y = birdY;
                 velocityY = 0;
+                velocityX = -4; // Reset speed
                 pipes.clear();
                 score = 0;
                 gameOver = false;
@@ -68,7 +69,6 @@ public class FlappyBird extends JPanel implements ActionListener,KeyListener{
 
         Bird(Image img){
             this.img = img;
-
         }
     }
 
@@ -170,6 +170,20 @@ public class FlappyBird extends JPanel implements ActionListener,KeyListener{
         velocityY += gravity;
         bird.y += velocityY;
         bird.y = Math.max(bird.y,0);
+
+        //adding dificulty
+        if(score>=20 && score<=100){
+            velocityX =-5;
+        }
+        if (score>100 && score<=150) {
+            velocityX = -6;
+        }
+        if (score>150 && score<=200) {
+            velocityX=-7;
+        }
+        if(score>200) {
+            velocityX=-8;
+        }
 
         for(int i=0;i<pipes.size();i++) {
             Pipe pipe = pipes.get(i);
